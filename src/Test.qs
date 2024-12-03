@@ -1,3 +1,4 @@
+import Qirc.Circuit.Diagram;
 import Qirc.Circuit.EmptyCircuit;
 import Qirc.Circuit.Circuit;
 @EntryPoint()
@@ -7,9 +8,9 @@ operation QuantumTeleportation(): Unit {
 
     //  Get the three qubits involved in the teleportation protocol.
     use qs = Qubit[3];
-    let msg =  Qirc.CreateNamedQubit("msg", qs[0]);
-    let alice = Qirc.CreateNamedQubit("alice", qs[1]);
-    let bob = Qirc.CreateNamedQubit("bob", qs[2]);
+    let msg =  Qirc.CreateNamedQubit("msg    ", qs[0]);
+    let alice = Qirc.CreateNamedQubit("alice  ", qs[1]);
+    let bob = Qirc.CreateNamedQubit("bob    ", qs[2]);
 
     // Create a Bell state shared between Alice and Bob.
     // equivalent to circ.append(cirq.H(alice), cirq.CNOT(alice, bob))
@@ -27,6 +28,8 @@ operation QuantumTeleportation(): Unit {
     Qirc.Circuit.Execute(circ);
 
     Qirc.Circuit.NTimes(2, circ);
+
+    Diagram(circ);
 
     ResetAll(qs);
 }
